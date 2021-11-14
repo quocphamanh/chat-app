@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Image.network(
-              'https://image.shutterstock.com/image-vector/user-interface-ui-ux-back-260nw-1414395617.jpg',
+            child: Image.asset(
+              'images/back.png',
             ),
           ),
           const SizedBox(
@@ -58,8 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   );
                 }
               },
-              child: Image.network(
-                  'https://www.oncrashreboot.com/images/create-apple-google-signin-buttons-quick-dirty-way-google.png'),
+              child: Image.asset('images/google_login.jpg'),
             ),
           ),
           Positioned(

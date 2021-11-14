@@ -48,8 +48,8 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: Column(
           children: [
-            Image.network(
-              'https://previews.123rf.com/images/phys1cx/phys1cx1605/phys1cx160500020/56618445-chat-app-icon-template-mobile-application-icon-vector-colorful-photo-icon.jpg',
+            Image.asset(
+              'images/splash.png',
               width: 300,
               height: 300,
             ),
