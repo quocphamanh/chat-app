@@ -1,6 +1,7 @@
 import 'package:chat_app/allConstants/app_constants.dart';
 import 'package:chat_app/allProviders/auth_provider.dart';
 import 'package:chat_app/allProviders/setting_provider.dart';
+import 'package:chat_app/allProviders/theme_provider.dart';
 import 'package:chat_app/allScreens/splash_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-bool isWhite = false;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,14 +44,18 @@ class MyApp extends StatelessWidget {
               firebaseFirestore: this.firebaseFirestore,
               firebaseStorage: this.firebaseStorage),
         ),
-      ],
-      child: MaterialApp(
-        title: AppConstants.appTitle,
-        theme: ThemeData(
-          primaryColor: Colors.black,
+        Provider<ThemeProvider>(
+          create: (_) => ThemeProvider(),
         ),
-        home: SplashPage(),
-        debugShowCheckedModeBanner: false,
+      ],
+      child: Consumer<ThemeProvider>(
+        builder: (context, theme, _) => MaterialApp(
+          title: AppConstants.appTitle,
+          theme: theme.getTheme(),
+          darkTheme: theme.getTheme(),
+          home: SplashPage(),
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }

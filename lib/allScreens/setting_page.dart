@@ -6,14 +6,12 @@ import 'package:chat_app/allConstants/firestore_constants.dart';
 import 'package:chat_app/allModels/user_chat.dart';
 import 'package:chat_app/allProviders/setting_provider.dart';
 import 'package:chat_app/allWidgets/loading_view.dart';
-import 'package:chat_app/main.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
@@ -22,9 +20,9 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isWhite ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: isWhite ? Colors.white : Colors.black,
+        backgroundColor: Theme.of(context).backgroundColor,
         iconTheme: IconThemeData(
           color: ColorConstants.primaryColor,
         ),

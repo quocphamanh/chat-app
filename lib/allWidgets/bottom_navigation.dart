@@ -4,7 +4,6 @@ import 'package:chat_app/allScreens/home_page.dart';
 import 'package:chat_app/allScreens/new_photo.dart';
 import 'package:chat_app/allScreens/profile_page.dart';
 import 'package:chat_app/allScreens/reel_page.dart';
-import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 
 class ButtomNavigationScreen extends StatefulWidget {
@@ -59,9 +58,9 @@ class _ButtomNavigationScreenState extends State<ButtomNavigationScreen> {
         },
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: ColorConstants.primaryColor,
-        unselectedItemColor: ColorConstants.greyColor,
-        backgroundColor: isWhite ? Colors.white : Colors.black,
+        selectedItemColor: Theme.of(context).iconTheme.color,
+        unselectedItemColor: Theme.of(context).iconTheme.color,
+        backgroundColor: Theme.of(context).backgroundColor,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -128,7 +127,6 @@ class _ButtomNavigationScreenState extends State<ButtomNavigationScreen> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.black, width: 1),
-                borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
                 'images/profile1.png',
@@ -140,7 +138,6 @@ class _ButtomNavigationScreenState extends State<ButtomNavigationScreen> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.black, width: 1),
-                borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
                 'images/profile1.png',

@@ -1,5 +1,5 @@
 import 'package:chat_app/allProviders/auth_provider.dart';
-import 'package:chat_app/allScreens/home_page.dart';
+import 'package:chat_app/allWidgets/bottom_navigation.dart';
 import 'package:chat_app/allWidgets/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomePage(),
+                      builder: (context) => ButtomNavigationScreen(),
                     ),
                   );
                 }

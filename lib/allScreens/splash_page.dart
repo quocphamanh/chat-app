@@ -1,7 +1,7 @@
 import 'package:chat_app/allConstants/color_constants.dart';
 import 'package:chat_app/allProviders/auth_provider.dart';
-import 'package:chat_app/allScreens/home_page.dart';
 import 'package:chat_app/allScreens/login_page.dart';
+import 'package:chat_app/allWidgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => ButtomNavigationScreen(),
         ),
       );
       return;

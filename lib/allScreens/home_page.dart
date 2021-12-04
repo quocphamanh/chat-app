@@ -1,9 +1,10 @@
 import 'package:chat_app/allConstants/constants.dart';
 import 'package:chat_app/allModels/popup_choices.dart';
 import 'package:chat_app/allProviders/auth_provider.dart';
+import 'package:chat_app/allProviders/theme_provider.dart';
 import 'package:chat_app/allScreens/login_page.dart';
 import 'package:chat_app/allScreens/setting_page.dart';
-import 'package:chat_app/main.dart';
+import 'package:chat_app/allWidgets/loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -110,26 +111,37 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      backgroundColor: isWhite ? Colors.white : Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: isWhite ? Colors.white : Colors.black,
-        leading: IconButton(
-          icon: Switch(
-            value: isWhite,
-            onChanged: (value) {
-              setState(() {
-                isWhite = value;
-                print(isWhite);
-              });
-            },
-            activeTrackColor: Colors.grey,
-            activeColor: Colors.white,
-            inactiveTrackColor: Colors.grey,
-            inactiveThumbColor: Colors.black,
-          ),
-          onPressed: () => {},
-        ),
+        backgroundColor: Theme.of(context).backgroundColor,
+        leading: FutureBuilder(
+            future: themeProvider.getThemeMode(),
+            builder: (BuildContext context, AsyncSnapshot<bool?> snapshot) {
+              if (snapshot.hasData) {
+                return IconButton(
+                  icon: Switch(
+                    value: snapshot.data!,
+                    onChanged: (value) {
+                      setState(() {
+                        value
+                            ? themeProvider.setDarkMode()
+                            : themeProvider.setLightMode();
+                      });
+                    },
+                    activeTrackColor: Colors.grey,
+                    activeColor: Colors.white,
+                    inactiveTrackColor: Colors.grey,
+                    inactiveThumbColor: Colors.black,
+                  ),
+                  onPressed: () => {},
+                );
+              } else {
+                return LoadingView();
+              }
+            }),
         actions: <Widget>[
           buildPopupMenu(),
         ],
