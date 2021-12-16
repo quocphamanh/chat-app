@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "529382178000-gut2o0dfvr4mvbbovupquk7de6q4scej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat_app",
+            "certificate_hash": "b2087f5fbb82059a2c4e03829943b27e3ed8ddbd"
+          }
+        },
+        {
           "client_id": "529382178000-r0cpfitment2g05v7fhjifhhmls011m8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

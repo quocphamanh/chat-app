@@ -32,34 +32,38 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: Colors.black87,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Image.asset(
-              'images/back.png',
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: GestureDetector(
-              onTap: () async {
-                bool isSuccess = await authProvider.handleSignIn();
-                if (isSuccess) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ButtomNavigationScreen(),
-                    ),
-                  );
-                }
-              },
-              child: Image.asset('images/google_login.jpg'),
-            ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Image.asset(
+                  'images/back.png',
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: GestureDetector(
+                  onTap: () async {
+                    bool isSuccess = await authProvider.handleSignIn();
+                    if (isSuccess) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ButtomNavigationScreen(),
+                        ),
+                      );
+                    }
+                  },
+                  child: Image.asset('images/google_login.jpg'),
+                ),
+              ),
+            ],
           ),
           Positioned(
             child: authProvider.status == Status.authenticating

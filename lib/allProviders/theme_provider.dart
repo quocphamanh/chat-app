@@ -2,6 +2,12 @@ import 'package:chat_app/allCommons/storage_common.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
+  late ThemeData _themeData;
+
+  ThemeProvider(String isDarkMode) {
+    _themeData = isDarkMode == 'dark' ? darkTheme : lightTheme;
+  }
+
   final darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.grey.shade900,
@@ -18,28 +24,11 @@ class ThemeProvider extends ChangeNotifier {
     iconTheme: IconThemeData(color: Colors.red, opacity: 0.8),
   );
 
-  ThemeData? _themeData;
-  ThemeData getTheme() => _themeData!;
-
-  ThemeProvider() {
-    StorageManager.readData('themeMode').then((value) {
-      print('value read from storage: ' + value.toString());
-      var themeMode = value ?? 'light';
-      if (themeMode == 'light') {
-        _themeData = lightTheme;
-      } else {
-        print('setting dark theme');
-        _themeData = darkTheme;
-      }
-      notifyListeners();
-    });
-  }
-
   Future<bool?> getThemeMode() async {
     var isDarkMode = await StorageManager.readData('themeMode');
-    if(isDarkMode == 'light') {
+    if (isDarkMode == 'light') {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
@@ -55,4 +44,6 @@ class ThemeProvider extends ChangeNotifier {
     StorageManager.saveData('themeMode', 'light');
     notifyListeners();
   }
+
+  ThemeData getTheme() => _themeData;
 }

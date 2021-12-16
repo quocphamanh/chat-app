@@ -15,17 +15,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-
-  runApp(MyApp(prefs: prefs));
+  SharedPreferences.getInstance().then((prefs) {
+    String isDarkMode = prefs.getString("themeMode") ?? 'light';
+    return runApp(MyApp(
+      prefs: prefs,
+      isDarkMode: isDarkMode,
+    ));
+  });
 }
 
 class MyApp extends StatelessWidget {
   final SharedPreferences prefs;
+  final String isDarkMode;
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
-  MyApp({required this.prefs});
+  MyApp({required this.prefs, required this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +43,24 @@ class MyApp extends StatelessWidget {
               prefs: prefs,
               firebaseFirestore: firebaseFirestore),
         ),
-        Provider<SettingProvider>(
+        ChangeNotifierProvider<SettingProvider>(
           create: (_) => SettingProvider(
               prefs: this.prefs,
               firebaseFirestore: this.firebaseFirestore,
               firebaseStorage: this.firebaseStorage),
         ),
-        Provider<ThemeProvider>(
-          create: (_) => ThemeProvider(),
-        ),
       ],
-      child: Consumer<ThemeProvider>(
-        builder: (context, theme, _) => MaterialApp(
-          title: AppConstants.appTitle,
-          theme: theme.getTheme(),
-          darkTheme: theme.getTheme(),
-          home: SplashPage(),
-          debugShowCheckedModeBanner: false,
+      child: ChangeNotifierProvider<ThemeProvider>(
+        child: Consumer<ThemeProvider>(
+          builder: (context, theme, _) => MaterialApp(
+            title: AppConstants.appTitle,
+            theme: theme.getTheme(),
+            darkTheme: theme.getTheme(),
+            home: SplashPage(),
+            debugShowCheckedModeBanner: false,
+          ),
         ),
+        create: (_) => ThemeProvider(isDarkMode),
       ),
     );
   }
